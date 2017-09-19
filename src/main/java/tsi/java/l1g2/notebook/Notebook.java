@@ -9,8 +9,8 @@ public class Notebook {
     private final List<Record> records = new ArrayList<>();
 
     @Command
-    public void create(String firstName, String lastName, String email, String... phones) {
-        Record r = new Record();
+    public void createPerson(String firstName, String lastName, String email, String... phones) {
+        Person r = new Person();
         r.setFirstName(firstName);
         r.setLastName(lastName);
         r.addPhones(phones);
