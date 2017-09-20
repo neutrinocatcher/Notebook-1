@@ -1,9 +1,6 @@
 package tsi.java.l1g2.notebook;
 
-import asg.cliche.Command;
-import asg.cliche.Shell;
-import asg.cliche.ShellDependent;
-import asg.cliche.ShellFactory;
+import asg.cliche.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -14,7 +11,10 @@ public class Notebook implements ShellDependent {
     private Shell parentShell; // need for cliche to allow subshells
 
     @Command
-    public void createPerson(String firstName, String lastName, String email, String... phones) {
+    public void createPerson(@Param(name = "first name") String firstName,
+                             @Param(name = "last name") String lastName,
+                             @Param(name = "email") String email,
+                             @Param(name = "phones") String... phones) {
         Person r = new Person();
         r.setFirstName(firstName);
         r.setLastName(lastName);
@@ -24,14 +24,15 @@ public class Notebook implements ShellDependent {
     }
 
     @Command
-    public void createNote(String text) {
+    public void createNote(@Param(name = "text") String text) {
         Note n = new Note();
         n.setText(text);
         records.add(n);
     }
 
     @Command
-    public void createReminder(String text, String time) {
+    public void createReminder(@Param(name = "text") String text,
+                               @Param(name = "time") String time) {
         Reminder r = new Reminder();
         r.setText(text);
         r.setTime(time);
@@ -39,7 +40,7 @@ public class Notebook implements ShellDependent {
     }
 
     @Command
-    public void remove(int id) {
+    public void remove(@Param(name = "id") int id) {
         for (int i = 0; i < records.size(); i++) {
             Record r = records.get(i);
             if (r.getId() == id) {
@@ -50,7 +51,7 @@ public class Notebook implements ShellDependent {
     }
 
     @Command
-    public void edit(int id) throws IOException {
+    public void edit(@Param(name = "id") int id) throws IOException {
         for (int i = 0; i < records.size(); i++) {
             Record r = records.get(i);
             if (r.getId() == id) {

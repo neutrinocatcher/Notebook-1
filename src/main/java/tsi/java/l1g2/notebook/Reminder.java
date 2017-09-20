@@ -1,6 +1,7 @@
 package tsi.java.l1g2.notebook;
 
 import asg.cliche.Command;
+import asg.cliche.Param;
 
 public class Reminder extends Note {
     private String time;
@@ -11,7 +12,7 @@ public class Reminder extends Note {
     }
 
     @Command
-    public void setTime(String time) {
+    public void setTime(@Param(name = "time") String time) {
         this.time = time;
     }
 

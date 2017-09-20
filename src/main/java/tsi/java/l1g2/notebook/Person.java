@@ -1,6 +1,7 @@
 package tsi.java.l1g2.notebook;
 
 import asg.cliche.Command;
+import asg.cliche.Param;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -18,7 +19,7 @@ public class Person extends Record {
     }
 
     @Command
-    public void setFirstName(String firstName) {
+    public void setFirstName(@Param(name = "first name") String firstName) {
         this.firstName = firstName;
     }
 
@@ -28,7 +29,7 @@ public class Person extends Record {
     }
 
     @Command
-    public void setLastName(String lastName) {
+    public void setLastName(@Param(name = "last name") String lastName) {
         this.lastName = lastName;
     }
 
@@ -38,7 +39,7 @@ public class Person extends Record {
     }
 
     @Command
-    public void addPhones(String... phones) {
+    public void addPhones(@Param(name = "phones") String... phones) {
         Collections.addAll(this.phones, phones);
     }
 
@@ -48,7 +49,7 @@ public class Person extends Record {
     }
 
     @Command
-    public void setEmail(String email) {
+    public void setEmail(@Param(name = "email") String email) {
         this.email = email;
     }
 
