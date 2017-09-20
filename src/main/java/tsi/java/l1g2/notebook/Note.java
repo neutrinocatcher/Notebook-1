@@ -1,12 +1,16 @@
 package tsi.java.l1g2.notebook;
 
+import asg.cliche.Command;
+
 public class Note extends Record {
     private String text;
 
+    @Command
     public String getText() {
         return text;
     }
 
+    @Command
     public void setText(String text) {
         this.text = text;
     }

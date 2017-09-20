@@ -1,5 +1,7 @@
 package tsi.java.l1g2.notebook;
 
+import asg.cliche.Command;
+
 public abstract class Record {
     private static int counter = 0;
     private int id;
@@ -9,6 +11,7 @@ public abstract class Record {
         id = counter;
     }
 
+    @Command
     public int getId() {
         return id;
     }

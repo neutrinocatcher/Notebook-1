@@ -1,12 +1,16 @@
 package tsi.java.l1g2.notebook;
 
+import asg.cliche.Command;
+
 public class Reminder extends Note {
     private String time;
 
+    @Command
     public String getTime() {
         return time;
     }
 
+    @Command
     public void setTime(String time) {
         this.time = time;
     }

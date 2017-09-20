@@ -1,12 +1,17 @@
 package tsi.java.l1g2.notebook;
 
 import asg.cliche.Command;
+import asg.cliche.Shell;
+import asg.cliche.ShellDependent;
+import asg.cliche.ShellFactory;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Notebook {
+public class Notebook implements ShellDependent {
     private final List<Record> records = new ArrayList<>();
+    private Shell parentShell; // need for cliche to allow subshells
 
     @Command
     public void createPerson(String firstName, String lastName, String email, String... phones) {
@@ -45,7 +50,27 @@ public class Notebook {
     }
 
     @Command
+    public void edit(int id) throws IOException {
+        for (int i = 0; i < records.size(); i++) {
+            Record r = records.get(i);
+            if (r.getId() == id) {
+                Shell shell = ShellFactory.createSubshell("#" + id, parentShell,
+                        "editing\n\t" + r.toString() + "\ntype 'exit' to return to main menu", r);
+                shell.commandLoop();
+                break;
+            }
+        }
+    }
+
+    @Command
     public List<Record> list() {
         return records;
+    }
+
+
+    // need for cliche to allow subshells
+    @Override
+    public void cliSetShell(Shell theShell) {
+        this.parentShell = theShell;
     }
 }
