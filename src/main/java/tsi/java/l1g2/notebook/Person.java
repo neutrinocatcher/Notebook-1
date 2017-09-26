@@ -6,8 +6,10 @@ import asg.cliche.Param;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
-public class Person extends Record {
+public class Person extends Note {
     private String firstName;
     private String lastName;
     private String email;
@@ -62,5 +64,18 @@ public class Person extends Record {
                 ", email='" + email + '\'' +
                 ", phones=" + phones +
                 '}';
+    }
+
+    @Override
+    public boolean contains(String str) {
+        if (super.contains(str)) {
+            return true;
+        }
+
+        if (Stream.concat(Stream.of(firstName, lastName, email), phones.stream()).anyMatch(r -> r.toLowerCase().contains(str.toLowerCase()))) {
+            return true;
+        }
+
+        return false;
     }
 }

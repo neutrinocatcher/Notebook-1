@@ -5,6 +5,7 @@ import asg.cliche.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Notebook implements ShellDependent {
     private final List<Record> records = new ArrayList<>();
@@ -37,6 +38,15 @@ public class Notebook implements ShellDependent {
         r.setText(text);
         r.setTime(time);
         records.add(r);
+    }
+
+    @Command
+    public void createAlarm(@Param(name = "text") String text,
+                               @Param(name = "time") String time) {
+        Alarm a = new Alarm();
+        a.setText(text);
+        a.setTime(time);
+        records.add(a);
     }
 
     @Command
@@ -73,5 +83,17 @@ public class Notebook implements ShellDependent {
     @Override
     public void cliSetShell(Shell theShell) {
         this.parentShell = theShell;
+    }
+
+    @Command
+    public List<Record> find(String str) {
+        List<Record> result = new ArrayList<>();
+        for (Record r : records) {
+            if (r.contains(str))
+                result.add(r);
+        }
+        return result;
+
+        //return records.stream().filter(r->r.contains(str)).collect(Collectors.toList());
     }
 }
